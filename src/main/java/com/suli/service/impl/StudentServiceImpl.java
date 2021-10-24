@@ -5,7 +5,9 @@ import com.suli.domain.Student;
 import com.suli.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,8 +18,9 @@ import java.util.List;
  */
 @Service
 public class StudentServiceImpl implements StudentService {
-    @Autowired
+    @Resource
     private StudentDao studentDao;
+
     @Override
     public int addStu(Student student) {
         return studentDao.insertStu(student);

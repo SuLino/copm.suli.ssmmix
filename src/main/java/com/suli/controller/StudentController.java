@@ -1,6 +1,9 @@
 package com.suli.controller;
 
 import com.suli.domain.Student;
+import com.suli.exception.AgeException;
+import com.suli.exception.MyException;
+import com.suli.exception.NameException;
 import com.suli.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +27,17 @@ public class StudentController {
     private StudentService studentService;
     //添加学生
     @RequestMapping("/addStudent.do")
-    public ModelAndView addStu(Student student){
+    public ModelAndView addStu(Student student) throws MyException {
         ModelAndView mv=new ModelAndView();
         String msg="注册失败";
         //调用service,处理业务逻辑，结果返回给用户
         int i = studentService.addStu(student);
+        if(!student.getName().equals("zs")){
+            throw new NameException("姓名不正确");
+        }
+        if(student.getAge()==null||student.getAge()>80){
+            throw new AgeException("年龄不正确");
+        }
         if(i>0){
             //添加成功，返回数据和视图
             msg="注册成功";

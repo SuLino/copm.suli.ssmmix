@@ -16,5 +16,6 @@
 1.创建HttpMessageServlet接口的7个实现类对象，处理java对象到json的转换
 2.解决静态资源中动态资源访问你失败的问题
 -->
+    <context:component-scan base-package="com.suli.handler"/>
     <mvc:annotation-driven/>
 </beans>
